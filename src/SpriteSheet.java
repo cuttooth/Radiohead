@@ -1,6 +1,8 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -38,6 +40,7 @@ public class SpriteSheet extends JFrame implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             drawMe = sprites[count];
             BufferedImage scales = new BufferedImage(this.width + 2,
                     this.height + 2, BufferedImage.TRANSLUCENT);
@@ -48,7 +51,6 @@ public class SpriteSheet extends JFrame implements Runnable {
             g2.dispose();
             drawMe = scales;
             count++;
-            System.out.println(count);
             if (count == 21 * 20 - 11) {
                 count = 0;
             }
@@ -103,6 +105,16 @@ public class SpriteSheet extends JFrame implements Runnable {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("radiohead.com");
         this.setUndecorated(true);
+
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice();
+        if (gd.isFullScreenSupported()) {
+            try {
+                gd.setFullScreenWindow(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
