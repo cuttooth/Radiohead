@@ -28,11 +28,9 @@ public class SpriteSheet extends JFrame implements Runnable {
     static int count = 0;
     static BufferedImage drawMe;
     static BufferedImage BKG = null;
-    Kernel kernel = new Kernel(3, 3, new float[] { 1f / 9f, 1f / 9f, 1f / 9f,
-            1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f });
+    Kernel kernel = new Kernel(3, 3, new float[] { 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f, 1f / 9f });
     BufferedImageOp op = new ConvolveOp(this.kernel);
-    BufferedImage cursorImg = new BufferedImage(16, 16,
-            BufferedImage.TYPE_INT_ARGB);
+    BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 
     @Override
     public void run() {
@@ -44,11 +42,9 @@ public class SpriteSheet extends JFrame implements Runnable {
             }
 
             drawMe = sprites[count];
-            BufferedImage scales = new BufferedImage(this.width + 2,
-                    this.height + 2, BufferedImage.TRANSLUCENT);
+            BufferedImage scales = new BufferedImage(this.width + 2, this.height + 2, BufferedImage.TRANSLUCENT);
             Graphics2D g2 = scales.createGraphics();
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                    RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g2.drawImage(drawMe, 0, 0, this.width + 2, this.height + 2, null);
             g2.dispose();
             drawMe = scales;
@@ -86,8 +82,7 @@ public class SpriteSheet extends JFrame implements Runnable {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                sprites[(i * cols) + j] = BKG.getSubimage(j * width, i * height,
-                        width, height);
+                sprites[(i * cols) + j] = BKG.getSubimage(j * width, i * height, width, height);
             }
         }
 
@@ -108,8 +103,7 @@ public class SpriteSheet extends JFrame implements Runnable {
         this.setTitle("radiohead.com");
         this.setUndecorated(true);
 
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getDefaultScreenDevice();
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         if (gd.isFullScreenSupported()) {
             try {
                 gd.setFullScreenWindow(this);
@@ -119,12 +113,10 @@ public class SpriteSheet extends JFrame implements Runnable {
         }
 
         // Transparent 16 x 16 pixel cursor image.
-        BufferedImage cursorImg = new BufferedImage(16, 16,
-                BufferedImage.TYPE_INT_ARGB);
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
 
         // Create a new blank cursor.
-        Cursor blankCursor = Toolkit.getDefaultToolkit()
-                .createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
 
         // Set the blank cursor to the JFrame.
         this.getContentPane().setCursor(blankCursor);
